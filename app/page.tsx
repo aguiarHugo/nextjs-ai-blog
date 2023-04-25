@@ -1,11 +1,14 @@
+import { Post } from '@prisma/client'
+
+import { prisma } from 'app/api/client'
 import Trending from 'app/(home)/Trending'
 import Tech from 'app/(home)/Tech'
 import Travel from 'app/(home)/Travel'
 import Other from 'app/(shared)/Other'
 import Subscribe from 'app/(shared)/Subscribe'
 import Sidebar from 'app/(shared)/Sidebar'
-import { prisma } from 'app/api/client'
-import { Post } from '@prisma/client'
+
+export const revalidate = 60;
 
 const getPosts = async () => {
   const posts = await prisma.post.findMany();
@@ -46,9 +49,9 @@ export default async function Home() {
       <Trending  trendingPosts={trendingPosts}/>
       <div className="md:flex gap-10 mb-5">
         <div className="basis-3/4">
-          <Tech />
-          <Travel />
-          <Other />
+          <Tech  techPosts={techPosts}/>
+          <Travel travelPosts={travelPosts} />
+          <Other otherPosts={otherPosts}/>
           <div className="hidden md:block"> 
             <Subscribe />
           </div>
