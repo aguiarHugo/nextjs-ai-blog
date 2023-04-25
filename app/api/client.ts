@@ -1,8 +1,8 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 let prismaInit: PrismaClient;
 
-if (process.env.NODE_ENV === "production" ) {
+if (process.env.NODE_ENV === "production") {
   prismaInit = new PrismaClient();
 } else {
   if (!(global as any).prisma) {
